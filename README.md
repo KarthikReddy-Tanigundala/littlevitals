@@ -168,8 +168,9 @@ vertical slice — is complete and green.**
 - [x] Synthea paediatric layer — patient encounters fact + demographics/diagnosis/geography dims + paediatric mart (age bands, LOS, readmission, SEIFA equity)
 - [x] Streamlit paediatric page + DS readmission model (ROC-AUC ≈ 0.67) & SEIFA equity analysis
 - [x] Elective surgery layer — episode fact + urgency/specialty dims + mart; Streamlit tracker; Kaplan–Meier waitlist survival
+- [x] Ingestion layer — resilient live|snapshot AIHW/Synthea/ABS loaders + Snowflake loader + pytest suite (9 passing, fully offline)
 - [ ] Power BI (Import) — Executive / ED / Paediatric / Elective / Benchmark pages
-- [ ] Snowflake provisioning + live AIHW ingestion; ABS SA2 choropleth
+- [ ] Snowflake provisioning (run the SQL + `.env`); ABS SA2 choropleth
 - [ ] Elective surgery + Synthea paediatric layers
 - [ ] GitHub Actions CI + Pages docs deploy
 

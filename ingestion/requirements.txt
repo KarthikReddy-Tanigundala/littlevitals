@@ -1,0 +1,7 @@
+# Ingestion layer dependencies.
+requests>=2.32
+pandas>=2.2
+openpyxl>=3.1
+snowflake-connector-python[pandas]>=3.12
+python-dotenv>=1.0
+pyyaml>=6.0
