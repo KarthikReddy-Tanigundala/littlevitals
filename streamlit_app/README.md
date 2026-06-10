@@ -11,6 +11,7 @@ executive scorecard, and a **funnel plot** for fair hospital comparison.
 | ED Performance | Hospital × triage wait heatmap, wait-vs-on-time scatter |
 | Hospital Scorecard | Rated scorecard table with YoY deltas |
 | Benchmark Intelligence | Spiegelhalter funnel plot (special-cause outliers) |
+| Paediatric Intel | Synthea layer: top diagnoses, age bands, readmission-by-SEIFA, winter surge |
 
 ## Run locally
 From the repo root, after `dbt build` has created `dev.duckdb`:

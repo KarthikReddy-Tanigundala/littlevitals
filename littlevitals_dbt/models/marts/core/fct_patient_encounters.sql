@@ -28,7 +28,8 @@ final as (
         cast(is_paediatric as boolean)           as is_paediatric,
         cast(los_hours as double)                as los_hours,
         cast(total_cost as double)               as total_cost,
-        cast(is_readmission_30d as boolean)      as is_readmission_30d
+        cast(is_readmission_30d as boolean)      as is_readmission_30d,
+        cast(had_readmission_30d as boolean)     as had_readmission_30d
     from enriched
 
 )

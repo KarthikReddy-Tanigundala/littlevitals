@@ -32,6 +32,22 @@ def load_fact() -> pd.DataFrame:
     ).fetch_df()
 
 
+def load_encounters() -> pd.DataFrame:
+    """Encounter fact joined to geography (SEIFA) and diagnosis attributes."""
+    return _con().execute(
+        """
+        select f.encounter_key, f.patient_id, f.age_years, f.age_band, f.is_paediatric,
+               f.encounter_class, f.los_hours, f.total_cost,
+               f.is_readmission_30d, f.had_readmission_30d,
+               g.seifa_irsd_quintile, g.remoteness_area,
+               d.body_system, d.condition_description
+        from GOLD.fct_patient_encounters f
+        join GOLD.dim_geography g on f.geography_key = g.geography_key
+        join GOLD.dim_diagnosis d on f.diagnosis_key = d.diagnosis_key
+        """
+    ).fetch_df()
+
+
 def load_monthly_paediatric() -> pd.Series:
     """
     Synthetic monthly paediatric ED presentations as a time-indexed Series

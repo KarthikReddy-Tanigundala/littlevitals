@@ -166,9 +166,9 @@ vertical slice — is complete and green.**
 - [x] Streamlit companion app — Overview · ED Performance · Scorecard · Benchmark (funnel plot), runs on DuckDB
 - [x] Data-science layer — SARIMA forecast · STL seasonality · k-means clustering · proportion tests + funnel ([analytics/](analytics/README.md))
 - [x] Synthea paediatric layer — patient encounters fact + demographics/diagnosis/geography dims + paediatric mart (age bands, LOS, readmission, SEIFA equity)
+- [x] Streamlit paediatric page + DS readmission model (ROC-AUC ≈ 0.67) & SEIFA equity analysis
 - [ ] Power BI (Import) — Executive / ED Deep-Dive / Paediatric / Benchmark pages
-- [ ] Streamlit paediatric page + DS readmission/survival/equity (data now available)
-- [ ] Snowflake provisioning + live AIHW ingestion; elective surgery fact; ABS choropleth
+- [ ] Snowflake provisioning + live AIHW ingestion; elective surgery fact + survival; ABS choropleth
 - [ ] Elective surgery + Synthea paediatric layers
 - [ ] GitHub Actions CI + Pages docs deploy
 

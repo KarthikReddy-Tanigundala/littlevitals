@@ -12,6 +12,7 @@ saves a figure to `analytics/outputs/`.
 | [`02_seasonality_decomposition.py`](02_seasonality_decomposition.py) | **STL** decomposition | Seasonal strength + quantified winter (Jun–Aug) surge |
 | [`03_hospital_clustering.py`](03_hospital_clustering.py) | **k-means** on standardised KPI vectors + PCA | Data-driven hospital clusters vs AIHW peer groups |
 | [`04_benchmark_significance.py`](04_benchmark_significance.py) | **Two-proportion z-test** + **funnel plot** (Spiegelhalter) | Significance vs pooled rate, special-cause outliers |
+| [`05_readmission_and_equity.py`](05_readmission_and_equity.py) | **Logistic regression** (held-out ROC-AUC) + **linear trend test** | 30-day readmission risk model (AUC ≈ 0.67) + SEIFA equity gradient |
 
 ## Run
 
@@ -35,8 +36,8 @@ python analytics\04_benchmark_significance.py
 - Comparisons report **uncertainty** (CIs / prediction intervals); funnel plots
   replace league-table ranking. No causal claims are made on observational data.
 
-## Planned (next, with the Synthea + ABS layers)
+## Planned (next)
 
-- **Readmission risk** — logistic regression on Synthea encounters (ROC-AUC, calibration).
-- **Waitlist survival** — Kaplan–Meier time-to-treatment by urgency category.
-- **Equity analysis** — wait/PPH gradients by SEIFA quintile & remoteness.
+- **Waitlist survival** — Kaplan–Meier time-to-treatment by urgency category
+  (with the elective-surgery layer).
+- **Calibration** — add a calibration curve + Brier score to the readmission model.

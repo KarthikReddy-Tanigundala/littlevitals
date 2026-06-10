@@ -8,6 +8,12 @@ and lands patients.csv / encounters.csv / conditions.csv into BRONZE. This scrip
 produces the SAME column shape so the dbt models are identical, but runs instantly
 with no Java/download. SYNTHETIC (seed=42) — never present as real patient data.
 
+To make the downstream readmission model meaningful, follow-up (readmission)
+encounters are seeded for higher-risk index encounters (inpatient stays, infants,
+chronic conditions, long stays, and socio-economic disadvantage). These encoded
+relationships are documented and clearly synthetic — they demonstrate the
+modelling/equity methodology, not real Victorian epidemiology.
+
 Run:  python data/sample/generate_synthea_sample.py
 Output (littlevitals_dbt/seeds/fixtures/):
     raw_synthea_patients.csv, raw_synthea_encounters.csv, raw_synthea_conditions.csv
@@ -25,11 +31,13 @@ N_PATIENTS = 2000
 ENC_DATE_START = date(2019, 1, 1)
 ENC_DATE_END = date(2024, 12, 31)
 
-# Victorian postcodes used (geography attributes live in seed_vic_geography.csv).
 POSTCODES = ["3000", "3052", "3168", "3084", "3011", "3128", "3220", "3021",
              "3076", "3199", "3030", "3174", "3056", "3145", "3805"]
+# Mirrors seed_vic_geography.csv (postcode -> SEIFA IRSD quintile, 1 = most disadvantaged).
+POSTCODE_SEIFA = {"3000": 5, "3052": 5, "3168": 3, "3084": 4, "3011": 2, "3128": 4,
+                  "3220": 3, "3021": 1, "3076": 2, "3199": 3, "3030": 2, "3174": 2,
+                  "3056": 4, "3145": 5, "3805": 3}
 
-# Hospital codes (match raw_aihw_reporting_units / dim_hospital). RCH is paediatric.
 PAED_HOSPITALS = ["H0001", "H0001", "H0001", "H0003", "H0007", "H0009"]  # RCH-weighted
 ADULT_HOSPITALS = ["H0002", "H0004", "H0005", "H0006", "H0008", "H0010"]
 
@@ -38,7 +46,6 @@ CLASS_WEIGHTS = [0.46, 0.18, 0.28, 0.08]
 LOS_HOURS = {"emergency": (1.5, 9.0), "inpatient": (20.0, 140.0),
              "ambulatory": (0.4, 2.5), "wellness": (0.2, 0.8)}
 
-# ICD-10-AM diagnoses (code, description, sample_weight). Codes match seed_icd10_paediatric.
 PAED_DX = [
     ("J06.9", "Acute upper respiratory infection", 18),
     ("J21.9", "Acute bronchiolitis", 11),
@@ -61,8 +68,8 @@ PAED_DX = [
 ]
 ADULT_DX = [("I10", "Essential hypertension"), ("E11.9", "Type 2 diabetes mellitus"),
             ("J44.9", "Chronic obstructive pulmonary disease"), ("R07.4", "Chest pain")]
-# Winter (Jun-Aug) boosts respiratory codes for children.
 RESP_CODES = {"J06.9", "J21.9", "J45.9", "J03.9", "J18.9", "B34.9"}
+CHRONIC_CODES = {"J45.9", "G40.9", "E11.9", "J44.9"}
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 OUT_DIR = REPO_ROOT / "littlevitals_dbt" / "seeds" / "fixtures"
@@ -73,50 +80,89 @@ def weighted_dx(rng: random.Random, month: int) -> tuple[str, str]:
     weights = [w * (2.0 if (c in RESP_CODES and month in (6, 7, 8)) else 1.0)
                for c, _, w in PAED_DX]
     code = rng.choices(codes, weights=weights, k=1)[0]
-    desc = next(d for c, d, _ in PAED_DX if c == code)
-    return code, desc
+    return code, next(d for c, d, _ in PAED_DX if c == code)
+
+
+def diagnosis(rng: random.Random, age_years: float, month: int) -> tuple[str, str]:
+    return weighted_dx(rng, month) if age_years < 18 else rng.choice(ADULT_DX)
+
+
+def los_cost(rng: random.Random, eclass: str) -> tuple[float, float]:
+    lo, hi = LOS_HOURS[eclass]
+    los = round(rng.uniform(lo, hi), 1)
+    return los, round(rng.uniform(120, 2600) * (1 + los / 24.0), 2)
+
+
+def readmission_prob(eclass: str, age_years: float, dx_code: str,
+                     los: float, seifa_q: int) -> float:
+    """Probability an index encounter is followed by a 30-day readmission."""
+    p = 0.02
+    if eclass == "inpatient":
+        p += 0.12
+    if age_years < 1:
+        p += 0.07
+    if dx_code in CHRONIC_CODES:
+        p += 0.06
+    if los > 72:
+        p += 0.04
+    if seifa_q <= 2:
+        p += 0.04
+    return min(p, 0.5)
 
 
 def main() -> None:
     rng = random.Random(SEED)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    patients: list = []
+    encounters: list = []
+    conditions: list = []
+    state = {"seq": 0}
 
-    patients, encounters, conditions = [], [], []
-    enc_seq = 0
+    def add_encounter(pid, start, eclass, dx_code, dx_desc, hosp) -> float:
+        state["seq"] += 1
+        eid = f"E{state['seq']:06d}"
+        los, cost = los_cost(rng, eclass)
+        encounters.append([eid, pid, start.isoformat(), eclass, hosp, los, cost, dx_code])
+        conditions.append([pid, eid, dx_code, dx_desc, start.isoformat()])
+        return los
+
     for i in range(1, N_PATIENTS + 1):
         pid = f"P{i:05d}"
         is_child = rng.random() < 0.65
-        if is_child:                       # born 2002-2024 -> mostly paediatric
+        if is_child:
             birth = date(2002, 1, 1) + timedelta(days=rng.randint(0, 22 * 365))
-        else:                              # adults
+        else:
             birth = date(1950, 1, 1) + timedelta(days=rng.randint(0, 52 * 365))
         sex = rng.choice(["M", "F"])
         postcode = rng.choice(POSTCODES)
+        seifa_q = POSTCODE_SEIFA[postcode]
         indigenous = "Y" if rng.random() < 0.04 else "N"
         patients.append([pid, birth.isoformat(), sex, postcode, indigenous])
 
-        for _ in range(rng.choices([1, 2, 3, 4, 5], weights=[40, 28, 18, 9, 5])[0]):
-            enc_seq += 1
-            eid = f"E{enc_seq:06d}"
-            # Encounter must occur on/after birth and within the reporting window.
+        n_enc = rng.choices([1, 2, 3, 4, 5], weights=[40, 28, 18, 9, 5])[0]
+        for _ in range(n_enc):
             earliest = max(ENC_DATE_START, birth)
             if earliest >= ENC_DATE_END:
                 start = ENC_DATE_END
             else:
                 start = earliest + timedelta(days=rng.randint(0, (ENC_DATE_END - earliest).days))
             eclass = rng.choices(ENCOUNTER_CLASSES, weights=CLASS_WEIGHTS, k=1)[0]
-            lo, hi = LOS_HOURS[eclass]
-            los = round(rng.uniform(lo, hi), 1)
-            cost = round(rng.uniform(120, 2600) * (1 + los / 24.0), 2)
-            age_years = (start - birth).days / 365.25
-            if age_years < 18:
-                code, desc = weighted_dx(rng, start.month)
-                hosp = rng.choice(PAED_HOSPITALS)
-            else:
-                code, desc = rng.choice(ADULT_DX)
-                hosp = rng.choice(ADULT_HOSPITALS)
-            encounters.append([eid, pid, start.isoformat(), eclass, hosp, los, cost, code])
-            conditions.append([pid, eid, code, desc, start.isoformat()])
+            age = (start - birth).days / 365.25
+            dx_code, dx_desc = diagnosis(rng, age, start.month)
+            hosp = rng.choice(PAED_HOSPITALS if age < 18 else ADULT_HOSPITALS)
+            los = add_encounter(pid, start, eclass, dx_code, dx_desc, hosp)
+
+            # Risk-based 30-day readmission follow-up.
+            if rng.random() < readmission_prob(eclass, age, dx_code, los, seifa_q):
+                fu_start = start + timedelta(days=rng.randint(5, 25))
+                if fu_start <= ENC_DATE_END:
+                    fu_class = "inpatient" if rng.random() < 0.5 else eclass
+                    fu_age = (fu_start - birth).days / 365.25
+                    if rng.random() < 0.6:
+                        fu_code, fu_desc = dx_code, dx_desc
+                    else:
+                        fu_code, fu_desc = diagnosis(rng, fu_age, fu_start.month)
+                    add_encounter(pid, fu_start, fu_class, fu_code, fu_desc, hosp)
 
     _write("raw_synthea_patients.csv",
            ["patient_id", "birthdate", "sex", "postcode", "indigenous_flag"], patients)
@@ -130,7 +176,7 @@ def main() -> None:
           f"(seed={SEED}, SYNTHETIC)")
 
 
-def _write(name: str, header: list[str], rows: list[list]) -> None:
+def _write(name: str, header: list, rows: list) -> None:
     with (OUT_DIR / name).open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(header)

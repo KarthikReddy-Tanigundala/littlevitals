@@ -68,6 +68,31 @@ def load_fact() -> pd.DataFrame:
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
+def load_paediatric_summary() -> pd.DataFrame:
+    return query("select * from GOLD.mart_paediatric_summary order by encounters desc")
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def load_encounters() -> pd.DataFrame:
+    return query(
+        """
+        select f.patient_id, f.age_band, f.is_paediatric, f.encounter_class,
+               f.los_hours, f.is_readmission_30d, f.had_readmission_30d,
+               g.seifa_irsd_quintile, d.body_system, d.condition_description
+        from GOLD.fct_patient_encounters f
+        join GOLD.dim_geography g on f.geography_key = g.geography_key
+        join GOLD.dim_diagnosis d on f.diagnosis_key = d.diagnosis_key
+        """
+    )
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def load_monthly_paediatric() -> pd.DataFrame:
+    return pd.read_csv(REPO_ROOT / "data" / "sample" / "monthly_paediatric_ed.csv",
+                       parse_dates=["month_date"])
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
 def financial_years() -> list[str]:
     df = query("select distinct financial_year from GOLD.fct_ed_presentations order by 1")
     return df["financial_year"].tolist()

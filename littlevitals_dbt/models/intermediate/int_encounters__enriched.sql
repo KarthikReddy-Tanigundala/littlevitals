@@ -55,7 +55,10 @@ banded as (
         {{ paediatric_age_band('age_years') }} as age_band,
         lag(start_date) over (
             partition by patient_id order by start_date, encounter_id
-        ) as prev_start_date
+        ) as prev_start_date,
+        lead(start_date) over (
+            partition by patient_id order by start_date, encounter_id
+        ) as next_start_date
     from joined
 ),
 
@@ -63,11 +66,19 @@ final as (
     select
         *,
         case when age_band <> 'Adult (18+y)' then true else false end as is_paediatric,
+        -- This encounter IS a readmission (a prior encounter within 30 days).
         case
             when prev_start_date is not null
                  and datediff('day', prev_start_date, start_date) <= 30
             then true else false
-        end as is_readmission_30d
+        end as is_readmission_30d,
+        -- This (index) encounter WAS FOLLOWED BY a readmission within 30 days
+        -- (forward-looking target for the readmission-risk model).
+        case
+            when next_start_date is not null
+                 and datediff('day', start_date, next_start_date) <= 30
+            then true else false
+        end as had_readmission_30d
     from banded
 )
 

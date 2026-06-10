@@ -121,3 +121,7 @@ models:
         data_type: double
       - name: is_readmission_30d
         data_type: boolean
+        description: "This encounter is a readmission (prior encounter within 30 days)."
+      - name: had_readmission_30d
+        data_type: boolean
+        description: "Index encounter followed by a readmission within 30 days (model target)."
