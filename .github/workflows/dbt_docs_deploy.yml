@@ -1,0 +1,55 @@
+name: Deploy dbt docs to GitHub Pages
+
+# Builds the catalog on DuckDB (no secrets) and publishes the dbt docs
+# lineage site to GitHub Pages on push to main (CLAUDE.md §4.4 / §20).
+# Swap the build target to `prod` + Snowflake secrets for a production catalog.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python data/sample/generate_sample_data.py
+      - run: dbt deps --project-dir littlevitals_dbt --profiles-dir littlevitals_dbt
+      - name: Build + generate docs
+        run: |
+          dbt build --project-dir littlevitals_dbt --profiles-dir littlevitals_dbt --target ci
+          dbt docs generate --project-dir littlevitals_dbt --profiles-dir littlevitals_dbt --target ci
+      - name: Assemble static site
+        run: |
+          mkdir -p _site
+          cp littlevitals_dbt/target/index.html _site/
+          cp littlevitals_dbt/target/catalog.json _site/
+          cp littlevitals_dbt/target/manifest.json _site/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build-docs
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

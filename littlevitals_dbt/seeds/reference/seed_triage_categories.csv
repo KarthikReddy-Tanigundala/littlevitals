@@ -1,0 +1,6 @@
+triage_code,triage_name,max_wait_minutes,on_time_target_pct,description
+1,Resuscitation,0,1.00,Immediately life-threatening; seen immediately
+2,Emergency,10,0.80,Imminently life-threatening or important time-critical treatment
+3,Urgent,30,0.75,Potentially life-threatening or situational urgency
+4,Semi-urgent,60,0.70,Potentially serious or situational complexity
+5,Non-urgent,120,0.70,Less urgent or clinico-administrative problems

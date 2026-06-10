@@ -1,0 +1,4 @@
+urgency_code,urgency_name,recommended_max_wait_days,description
+1,Category 1,30,Admission desirable within 30 days; potential to deteriorate quickly
+2,Category 2,90,Admission desirable within 90 days; some pain/dysfunction but unlikely to deteriorate quickly
+3,Category 3,365,Admission desirable within 365 days; minimal pain dysfunction or disability

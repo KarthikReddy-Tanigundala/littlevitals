@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: mart_hospital_scorecard
+    description: >
+      Executive scorecard: one row per hospital per financial year with headline
+      ED KPIs, an overall rating, and year-on-year deltas. Consumed by the Power
+      BI scorecard page and the Streamlit app.
+    columns:
+      - name: hospital_name
+        description: Hospital name.
+        tests: [not_null]
+      - name: financial_year
+        tests: [not_null]
+      - name: scorecard_overall_rating
+        description: "Meets Benchmark / At Risk / Below Benchmark (from Cat 2 on-time)."
+        tests:
+          - accepted_values:
+              values: ["Meets Benchmark", "At Risk", "Below Benchmark"]
+      - name: pct_ed_seen_on_time_cat2
+        tests:
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 1 }
+    # Composite grain test: hospital + FY must be unique.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [hospital_name, financial_year]

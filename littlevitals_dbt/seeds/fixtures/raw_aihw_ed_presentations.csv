@@ -1,0 +1,301 @@
+hospital_code,hospital_name,state,financial_year,triage_category,total_presentations,median_wait_minutes,pct_seen_on_time,four_hour_rule_pct
+H0001,Royal Children's Hospital,VIC,2020-21,1,725,0,1.0,0.742
+H0001,Royal Children's Hospital,VIC,2020-21,2,12273,8,0.775,0.742
+H0001,Royal Children's Hospital,VIC,2020-21,3,36818,17,0.703,0.742
+H0001,Royal Children's Hospital,VIC,2020-21,4,31559,28,0.762,0.742
+H0001,Royal Children's Hospital,VIC,2020-21,5,11488,46,0.923,0.742
+H0001,Royal Children's Hospital,VIC,2021-22,1,717,0,1.0,0.775
+H0001,Royal Children's Hospital,VIC,2021-22,2,12069,7,0.807,0.775
+H0001,Royal Children's Hospital,VIC,2021-22,3,37120,19,0.666,0.775
+H0001,Royal Children's Hospital,VIC,2021-22,4,33191,36,0.788,0.775
+H0001,Royal Children's Hospital,VIC,2021-22,5,11774,48,0.958,0.775
+H0001,Royal Children's Hospital,VIC,2022-23,1,785,0,1.0,0.724
+H0001,Royal Children's Hospital,VIC,2022-23,2,12443,10,0.723,0.724
+H0001,Royal Children's Hospital,VIC,2022-23,3,36959,22,0.635,0.724
+H0001,Royal Children's Hospital,VIC,2022-23,4,31431,32,0.747,0.724
+H0001,Royal Children's Hospital,VIC,2022-23,5,11745,47,0.912,0.724
+H0001,Royal Children's Hospital,VIC,2023-24,1,800,0,1.0,0.671
+H0001,Royal Children's Hospital,VIC,2023-24,2,12047,11,0.71,0.671
+H0001,Royal Children's Hospital,VIC,2023-24,3,37866,29,0.648,0.671
+H0001,Royal Children's Hospital,VIC,2023-24,4,32764,40,0.771,0.671
+H0001,Royal Children's Hospital,VIC,2023-24,5,12013,46,0.892,0.671
+H0001,Royal Children's Hospital,VIC,2024-25,1,763,0,1.0,0.641
+H0001,Royal Children's Hospital,VIC,2024-25,2,12537,10,0.714,0.641
+H0001,Royal Children's Hospital,VIC,2024-25,3,40933,26,0.616,0.641
+H0001,Royal Children's Hospital,VIC,2024-25,4,32562,40,0.736,0.641
+H0001,Royal Children's Hospital,VIC,2024-25,5,12089,57,0.904,0.641
+H0002,The Royal Melbourne Hospital,VIC,2020-21,1,661,0,1.0,0.82
+H0002,The Royal Melbourne Hospital,VIC,2020-21,2,10317,8,0.768,0.82
+H0002,The Royal Melbourne Hospital,VIC,2020-21,3,32777,19,0.663,0.82
+H0002,The Royal Melbourne Hospital,VIC,2020-21,4,29472,36,0.758,0.82
+H0002,The Royal Melbourne Hospital,VIC,2020-21,5,10439,42,0.903,0.82
+H0002,The Royal Melbourne Hospital,VIC,2021-22,1,677,0,1.0,0.753
+H0002,The Royal Melbourne Hospital,VIC,2021-22,2,11186,9,0.757,0.753
+H0002,The Royal Melbourne Hospital,VIC,2021-22,3,35948,22,0.64,0.753
+H0002,The Royal Melbourne Hospital,VIC,2021-22,4,28502,42,0.742,0.753
+H0002,The Royal Melbourne Hospital,VIC,2021-22,5,10354,53,0.887,0.753
+H0002,The Royal Melbourne Hospital,VIC,2022-23,1,687,0,1.0,0.741
+H0002,The Royal Melbourne Hospital,VIC,2022-23,2,10565,9,0.671,0.741
+H0002,The Royal Melbourne Hospital,VIC,2022-23,3,35684,29,0.63,0.741
+H0002,The Royal Melbourne Hospital,VIC,2022-23,4,28524,34,0.733,0.741
+H0002,The Royal Melbourne Hospital,VIC,2022-23,5,10902,47,0.869,0.741
+H0002,The Royal Melbourne Hospital,VIC,2023-24,1,712,0,1.0,0.711
+H0002,The Royal Melbourne Hospital,VIC,2023-24,2,11332,10,0.702,0.711
+H0002,The Royal Melbourne Hospital,VIC,2023-24,3,34429,25,0.592,0.711
+H0002,The Royal Melbourne Hospital,VIC,2023-24,4,30169,38,0.689,0.711
+H0002,The Royal Melbourne Hospital,VIC,2023-24,5,11106,57,0.866,0.711
+H0002,The Royal Melbourne Hospital,VIC,2024-25,1,707,0,1.0,0.63
+H0002,The Royal Melbourne Hospital,VIC,2024-25,2,11487,10,0.644,0.63
+H0002,The Royal Melbourne Hospital,VIC,2024-25,3,36803,26,0.604,0.63
+H0002,The Royal Melbourne Hospital,VIC,2024-25,4,31988,37,0.684,0.63
+H0002,The Royal Melbourne Hospital,VIC,2024-25,5,11267,50,0.838,0.63
+H0003,Monash Medical Centre,VIC,2020-21,1,720,0,1.0,0.786
+H0003,Monash Medical Centre,VIC,2020-21,2,11376,7,0.716,0.786
+H0003,Monash Medical Centre,VIC,2020-21,3,35844,22,0.654,0.786
+H0003,Monash Medical Centre,VIC,2020-21,4,31234,42,0.676,0.786
+H0003,Monash Medical Centre,VIC,2020-21,5,10909,49,0.882,0.786
+H0003,Monash Medical Centre,VIC,2021-22,1,704,0,1.0,0.725
+H0003,Monash Medical Centre,VIC,2021-22,2,11205,10,0.697,0.725
+H0003,Monash Medical Centre,VIC,2021-22,3,36640,25,0.583,0.725
+H0003,Monash Medical Centre,VIC,2021-22,4,31559,43,0.718,0.725
+H0003,Monash Medical Centre,VIC,2021-22,5,11245,59,0.83,0.725
+H0003,Monash Medical Centre,VIC,2022-23,1,724,0,1.0,0.697
+H0003,Monash Medical Centre,VIC,2022-23,2,12464,10,0.687,0.697
+H0003,Monash Medical Centre,VIC,2022-23,3,36412,26,0.607,0.697
+H0003,Monash Medical Centre,VIC,2022-23,4,32630,42,0.693,0.697
+H0003,Monash Medical Centre,VIC,2022-23,5,10771,52,0.868,0.697
+H0003,Monash Medical Centre,VIC,2023-24,1,768,0,1.0,0.693
+H0003,Monash Medical Centre,VIC,2023-24,2,12187,13,0.629,0.693
+H0003,Monash Medical Centre,VIC,2023-24,3,39217,25,0.541,0.693
+H0003,Monash Medical Centre,VIC,2023-24,4,32169,46,0.654,0.693
+H0003,Monash Medical Centre,VIC,2023-24,5,11000,63,0.825,0.693
+H0003,Monash Medical Centre,VIC,2024-25,1,758,0,1.0,0.67
+H0003,Monash Medical Centre,VIC,2024-25,2,12965,10,0.653,0.67
+H0003,Monash Medical Centre,VIC,2024-25,3,37233,29,0.56,0.67
+H0003,Monash Medical Centre,VIC,2024-25,4,31847,42,0.685,0.67
+H0003,Monash Medical Centre,VIC,2024-25,5,11162,57,0.86,0.67
+H0004,Austin Hospital,VIC,2020-21,1,632,0,1.0,0.746
+H0004,Austin Hospital,VIC,2020-21,2,10978,9,0.752,0.746
+H0004,Austin Hospital,VIC,2020-21,3,31427,23,0.692,0.746
+H0004,Austin Hospital,VIC,2020-21,4,27968,40,0.749,0.746
+H0004,Austin Hospital,VIC,2020-21,5,9436,53,0.888,0.746
+H0004,Austin Hospital,VIC,2021-22,1,627,0,1.0,0.785
+H0004,Austin Hospital,VIC,2021-22,2,10634,8,0.746,0.785
+H0004,Austin Hospital,VIC,2021-22,3,33256,21,0.658,0.785
+H0004,Austin Hospital,VIC,2021-22,4,27013,37,0.754,0.785
+H0004,Austin Hospital,VIC,2021-22,5,10271,44,0.885,0.785
+H0004,Austin Hospital,VIC,2022-23,1,666,0,1.0,0.68
+H0004,Austin Hospital,VIC,2022-23,2,10792,10,0.706,0.68
+H0004,Austin Hospital,VIC,2022-23,3,30834,22,0.643,0.68
+H0004,Austin Hospital,VIC,2022-23,4,28673,39,0.74,0.68
+H0004,Austin Hospital,VIC,2022-23,5,9971,47,0.858,0.68
+H0004,Austin Hospital,VIC,2023-24,1,682,0,1.0,0.722
+H0004,Austin Hospital,VIC,2023-24,2,10449,10,0.666,0.722
+H0004,Austin Hospital,VIC,2023-24,3,34038,30,0.594,0.722
+H0004,Austin Hospital,VIC,2023-24,4,28484,37,0.736,0.722
+H0004,Austin Hospital,VIC,2023-24,5,10467,61,0.899,0.722
+H0004,Austin Hospital,VIC,2024-25,1,715,0,1.0,0.622
+H0004,Austin Hospital,VIC,2024-25,2,11688,12,0.699,0.622
+H0004,Austin Hospital,VIC,2024-25,3,34095,31,0.566,0.622
+H0004,Austin Hospital,VIC,2024-25,4,30777,46,0.693,0.622
+H0004,Austin Hospital,VIC,2024-25,5,10984,54,0.858,0.622
+H0005,Footscray Hospital,VIC,2020-21,1,473,0,1.0,0.758
+H0005,Footscray Hospital,VIC,2020-21,2,8365,10,0.677,0.758
+H0005,Footscray Hospital,VIC,2020-21,3,25184,23,0.639,0.758
+H0005,Footscray Hospital,VIC,2020-21,4,21184,44,0.647,0.758
+H0005,Footscray Hospital,VIC,2020-21,5,7930,49,0.858,0.758
+H0005,Footscray Hospital,VIC,2021-22,1,488,0,1.0,0.719
+H0005,Footscray Hospital,VIC,2021-22,2,8059,10,0.663,0.719
+H0005,Footscray Hospital,VIC,2021-22,3,24726,24,0.593,0.719
+H0005,Footscray Hospital,VIC,2021-22,4,19818,46,0.662,0.719
+H0005,Footscray Hospital,VIC,2021-22,5,7648,60,0.83,0.719
+H0005,Footscray Hospital,VIC,2022-23,1,512,0,1.0,0.686
+H0005,Footscray Hospital,VIC,2022-23,2,8465,11,0.628,0.686
+H0005,Footscray Hospital,VIC,2022-23,3,24689,27,0.544,0.686
+H0005,Footscray Hospital,VIC,2022-23,4,20957,38,0.645,0.686
+H0005,Footscray Hospital,VIC,2022-23,5,8015,61,0.834,0.686
+H0005,Footscray Hospital,VIC,2023-24,1,523,0,1.0,0.674
+H0005,Footscray Hospital,VIC,2023-24,2,8405,12,0.629,0.674
+H0005,Footscray Hospital,VIC,2023-24,3,25952,30,0.513,0.674
+H0005,Footscray Hospital,VIC,2023-24,4,22077,51,0.658,0.674
+H0005,Footscray Hospital,VIC,2023-24,5,7681,52,0.811,0.674
+H0005,Footscray Hospital,VIC,2024-25,1,548,0,1.0,0.647
+H0005,Footscray Hospital,VIC,2024-25,2,8395,11,0.581,0.647
+H0005,Footscray Hospital,VIC,2024-25,3,25884,31,0.541,0.647
+H0005,Footscray Hospital,VIC,2024-25,4,21613,45,0.648,0.647
+H0005,Footscray Hospital,VIC,2024-25,5,7854,64,0.8,0.647
+H0006,Box Hill Hospital,VIC,2020-21,1,479,0,1.0,0.792
+H0006,Box Hill Hospital,VIC,2020-21,2,7870,8,0.721,0.792
+H0006,Box Hill Hospital,VIC,2020-21,3,26361,22,0.633,0.792
+H0006,Box Hill Hospital,VIC,2020-21,4,20888,40,0.717,0.792
+H0006,Box Hill Hospital,VIC,2020-21,5,7920,53,0.909,0.792
+H0006,Box Hill Hospital,VIC,2021-22,1,546,0,1.0,0.786
+H0006,Box Hill Hospital,VIC,2021-22,2,8539,10,0.723,0.786
+H0006,Box Hill Hospital,VIC,2021-22,3,27305,26,0.628,0.786
+H0006,Box Hill Hospital,VIC,2021-22,4,21785,35,0.718,0.786
+H0006,Box Hill Hospital,VIC,2021-22,5,8223,52,0.878,0.786
+H0006,Box Hill Hospital,VIC,2022-23,1,514,0,1.0,0.686
+H0006,Box Hill Hospital,VIC,2022-23,2,8570,9,0.674,0.686
+H0006,Box Hill Hospital,VIC,2022-23,3,26773,28,0.574,0.686
+H0006,Box Hill Hospital,VIC,2022-23,4,22118,41,0.695,0.686
+H0006,Box Hill Hospital,VIC,2022-23,5,7776,53,0.884,0.686
+H0006,Box Hill Hospital,VIC,2023-24,1,565,0,1.0,0.706
+H0006,Box Hill Hospital,VIC,2023-24,2,8426,11,0.685,0.706
+H0006,Box Hill Hospital,VIC,2023-24,3,28237,32,0.575,0.706
+H0006,Box Hill Hospital,VIC,2023-24,4,23756,43,0.696,0.706
+H0006,Box Hill Hospital,VIC,2023-24,5,8086,50,0.856,0.706
+H0006,Box Hill Hospital,VIC,2024-25,1,547,0,1.0,0.647
+H0006,Box Hill Hospital,VIC,2024-25,2,8703,10,0.667,0.647
+H0006,Box Hill Hospital,VIC,2024-25,3,25596,28,0.574,0.647
+H0006,Box Hill Hospital,VIC,2024-25,4,21757,45,0.668,0.647
+H0006,Box Hill Hospital,VIC,2024-25,5,8163,48,0.843,0.647
+H0007,University Hospital Geelong,VIC,2020-21,1,581,0,1.0,0.766
+H0007,University Hospital Geelong,VIC,2020-21,2,9503,8,0.705,0.766
+H0007,University Hospital Geelong,VIC,2020-21,3,26942,23,0.68,0.766
+H0007,University Hospital Geelong,VIC,2020-21,4,23696,38,0.727,0.766
+H0007,University Hospital Geelong,VIC,2020-21,5,8763,55,0.897,0.766
+H0007,University Hospital Geelong,VIC,2021-22,1,557,0,1.0,0.712
+H0007,University Hospital Geelong,VIC,2021-22,2,9435,8,0.722,0.712
+H0007,University Hospital Geelong,VIC,2021-22,3,29616,22,0.626,0.712
+H0007,University Hospital Geelong,VIC,2021-22,4,25127,34,0.719,0.712
+H0007,University Hospital Geelong,VIC,2021-22,5,9207,47,0.832,0.712
+H0007,University Hospital Geelong,VIC,2022-23,1,619,0,1.0,0.734
+H0007,University Hospital Geelong,VIC,2022-23,2,9216,11,0.688,0.734
+H0007,University Hospital Geelong,VIC,2022-23,3,28435,29,0.611,0.734
+H0007,University Hospital Geelong,VIC,2022-23,4,25425,36,0.719,0.734
+H0007,University Hospital Geelong,VIC,2022-23,5,9288,52,0.846,0.734
+H0007,University Hospital Geelong,VIC,2023-24,1,596,0,1.0,0.69
+H0007,University Hospital Geelong,VIC,2023-24,2,9456,13,0.668,0.69
+H0007,University Hospital Geelong,VIC,2023-24,3,31287,30,0.566,0.69
+H0007,University Hospital Geelong,VIC,2023-24,4,26349,49,0.666,0.69
+H0007,University Hospital Geelong,VIC,2023-24,5,9523,56,0.849,0.69
+H0007,University Hospital Geelong,VIC,2024-25,1,605,0,1.0,0.678
+H0007,University Hospital Geelong,VIC,2024-25,2,9654,12,0.635,0.678
+H0007,University Hospital Geelong,VIC,2024-25,3,30874,30,0.553,0.678
+H0007,University Hospital Geelong,VIC,2024-25,4,25095,48,0.661,0.678
+H0007,University Hospital Geelong,VIC,2024-25,5,9178,62,0.83,0.678
+H0008,Sunshine Hospital,VIC,2020-21,1,560,0,1.0,0.796
+H0008,Sunshine Hospital,VIC,2020-21,2,8922,9,0.679,0.796
+H0008,Sunshine Hospital,VIC,2020-21,3,29378,25,0.609,0.796
+H0008,Sunshine Hospital,VIC,2020-21,4,24321,43,0.636,0.796
+H0008,Sunshine Hospital,VIC,2020-21,5,8492,58,0.808,0.796
+H0008,Sunshine Hospital,VIC,2021-22,1,576,0,1.0,0.748
+H0008,Sunshine Hospital,VIC,2021-22,2,9170,10,0.646,0.748
+H0008,Sunshine Hospital,VIC,2021-22,3,27986,23,0.552,0.748
+H0008,Sunshine Hospital,VIC,2021-22,4,23467,42,0.666,0.748
+H0008,Sunshine Hospital,VIC,2021-22,5,8478,52,0.809,0.748
+H0008,Sunshine Hospital,VIC,2022-23,1,592,0,1.0,0.758
+H0008,Sunshine Hospital,VIC,2022-23,2,9298,10,0.611,0.758
+H0008,Sunshine Hospital,VIC,2022-23,3,28079,29,0.526,0.758
+H0008,Sunshine Hospital,VIC,2022-23,4,26275,44,0.652,0.758
+H0008,Sunshine Hospital,VIC,2022-23,5,8665,65,0.799,0.758
+H0008,Sunshine Hospital,VIC,2023-24,1,605,0,1.0,0.696
+H0008,Sunshine Hospital,VIC,2023-24,2,9419,14,0.609,0.696
+H0008,Sunshine Hospital,VIC,2023-24,3,31321,30,0.494,0.696
+H0008,Sunshine Hospital,VIC,2023-24,4,26126,40,0.609,0.696
+H0008,Sunshine Hospital,VIC,2023-24,5,9313,56,0.83,0.696
+H0008,Sunshine Hospital,VIC,2024-25,1,597,0,1.0,0.681
+H0008,Sunshine Hospital,VIC,2024-25,2,9625,12,0.597,0.681
+H0008,Sunshine Hospital,VIC,2024-25,3,30612,36,0.498,0.681
+H0008,Sunshine Hospital,VIC,2024-25,4,25420,48,0.644,0.681
+H0008,Sunshine Hospital,VIC,2024-25,5,9415,56,0.773,0.681
+H0009,The Northern Hospital,VIC,2020-21,1,586,0,1.0,0.753
+H0009,The Northern Hospital,VIC,2020-21,2,9795,9,0.687,0.753
+H0009,The Northern Hospital,VIC,2020-21,3,29475,25,0.632,0.753
+H0009,The Northern Hospital,VIC,2020-21,4,25627,40,0.705,0.753
+H0009,The Northern Hospital,VIC,2020-21,5,9504,55,0.85,0.753
+H0009,The Northern Hospital,VIC,2021-22,1,631,0,1.0,0.744
+H0009,The Northern Hospital,VIC,2021-22,2,10537,8,0.66,0.744
+H0009,The Northern Hospital,VIC,2021-22,3,30792,27,0.594,0.744
+H0009,The Northern Hospital,VIC,2021-22,4,26123,36,0.681,0.744
+H0009,The Northern Hospital,VIC,2021-22,5,9767,62,0.83,0.744
+H0009,The Northern Hospital,VIC,2022-23,1,595,0,1.0,0.686
+H0009,The Northern Hospital,VIC,2022-23,2,9883,9,0.678,0.686
+H0009,The Northern Hospital,VIC,2022-23,3,32236,28,0.587,0.686
+H0009,The Northern Hospital,VIC,2022-23,4,27834,45,0.646,0.686
+H0009,The Northern Hospital,VIC,2022-23,5,9075,62,0.818,0.686
+H0009,The Northern Hospital,VIC,2023-24,1,621,0,1.0,0.723
+H0009,The Northern Hospital,VIC,2023-24,2,10420,10,0.621,0.723
+H0009,The Northern Hospital,VIC,2023-24,3,31554,31,0.561,0.723
+H0009,The Northern Hospital,VIC,2023-24,4,26811,47,0.637,0.723
+H0009,The Northern Hospital,VIC,2023-24,5,10223,64,0.823,0.723
+H0009,The Northern Hospital,VIC,2024-25,1,635,0,1.0,0.645
+H0009,The Northern Hospital,VIC,2024-25,2,10517,13,0.629,0.645
+H0009,The Northern Hospital,VIC,2024-25,3,32450,30,0.511,0.645
+H0009,The Northern Hospital,VIC,2024-25,4,27086,49,0.658,0.645
+H0009,The Northern Hospital,VIC,2024-25,5,10111,54,0.813,0.645
+H0010,Frankston Hospital,VIC,2020-21,1,552,0,1.0,0.775
+H0010,Frankston Hospital,VIC,2020-21,2,8896,7,0.73,0.775
+H0010,Frankston Hospital,VIC,2020-21,3,27215,22,0.646,0.775
+H0010,Frankston Hospital,VIC,2020-21,4,24149,40,0.728,0.775
+H0010,Frankston Hospital,VIC,2020-21,5,7943,54,0.89,0.775
+H0010,Frankston Hospital,VIC,2021-22,1,533,0,1.0,0.751
+H0010,Frankston Hospital,VIC,2021-22,2,8638,9,0.723,0.751
+H0010,Frankston Hospital,VIC,2021-22,3,28429,24,0.663,0.751
+H0010,Frankston Hospital,VIC,2021-22,4,24030,35,0.737,0.751
+H0010,Frankston Hospital,VIC,2021-22,5,8249,58,0.88,0.751
+H0010,Frankston Hospital,VIC,2022-23,1,548,0,1.0,0.703
+H0010,Frankston Hospital,VIC,2022-23,2,9085,9,0.702,0.703
+H0010,Frankston Hospital,VIC,2022-23,3,27551,26,0.613,0.703
+H0010,Frankston Hospital,VIC,2022-23,4,23680,37,0.691,0.703
+H0010,Frankston Hospital,VIC,2022-23,5,8704,54,0.854,0.703
+H0010,Frankston Hospital,VIC,2023-24,1,583,0,1.0,0.653
+H0010,Frankston Hospital,VIC,2023-24,2,9140,11,0.699,0.653
+H0010,Frankston Hospital,VIC,2023-24,3,29814,28,0.562,0.653
+H0010,Frankston Hospital,VIC,2023-24,4,24185,42,0.722,0.653
+H0010,Frankston Hospital,VIC,2023-24,5,9001,53,0.872,0.653
+H0010,Frankston Hospital,VIC,2024-25,1,564,0,1.0,0.678
+H0010,Frankston Hospital,VIC,2024-25,2,9214,12,0.66,0.678
+H0010,Frankston Hospital,VIC,2024-25,3,28986,30,0.601,0.678
+H0010,Frankston Hospital,VIC,2024-25,4,25024,47,0.693,0.678
+H0010,Frankston Hospital,VIC,2024-25,5,8515,59,0.876,0.678
+H0100,The Children's Hospital at Westmead,NSW,2020-21,1,501,0,1.0,0.743
+H0100,The Children's Hospital at Westmead,NSW,2020-21,2,8929,8,0.766,0.743
+H0100,The Children's Hospital at Westmead,NSW,2020-21,3,25121,22,0.712,0.743
+H0100,The Children's Hospital at Westmead,NSW,2020-21,4,22121,36,0.774,0.743
+H0100,The Children's Hospital at Westmead,NSW,2020-21,5,7620,52,0.898,0.743
+H0100,The Children's Hospital at Westmead,NSW,2021-22,1,520,0,1.0,0.722
+H0100,The Children's Hospital at Westmead,NSW,2021-22,2,8145,8,0.772,0.722
+H0100,The Children's Hospital at Westmead,NSW,2021-22,3,26226,21,0.685,0.722
+H0100,The Children's Hospital at Westmead,NSW,2021-22,4,21242,36,0.725,0.722
+H0100,The Children's Hospital at Westmead,NSW,2021-22,5,7711,42,0.918,0.722
+H0100,The Children's Hospital at Westmead,NSW,2022-23,1,527,0,1.0,0.734
+H0100,The Children's Hospital at Westmead,NSW,2022-23,2,8939,10,0.715,0.734
+H0100,The Children's Hospital at Westmead,NSW,2022-23,3,26584,27,0.612,0.734
+H0100,The Children's Hospital at Westmead,NSW,2022-23,4,22908,38,0.714,0.734
+H0100,The Children's Hospital at Westmead,NSW,2022-23,5,8376,53,0.92,0.734
+H0100,The Children's Hospital at Westmead,NSW,2023-24,1,545,0,1.0,0.728
+H0100,The Children's Hospital at Westmead,NSW,2023-24,2,8873,11,0.673,0.728
+H0100,The Children's Hospital at Westmead,NSW,2023-24,3,27088,27,0.634,0.728
+H0100,The Children's Hospital at Westmead,NSW,2023-24,4,22295,44,0.726,0.728
+H0100,The Children's Hospital at Westmead,NSW,2023-24,5,8054,55,0.897,0.728
+H0100,The Children's Hospital at Westmead,NSW,2024-25,1,568,0,1.0,0.678
+H0100,The Children's Hospital at Westmead,NSW,2024-25,2,9448,11,0.679,0.678
+H0100,The Children's Hospital at Westmead,NSW,2024-25,3,27778,28,0.614,0.678
+H0100,The Children's Hospital at Westmead,NSW,2024-25,4,22778,39,0.735,0.678
+H0100,The Children's Hospital at Westmead,NSW,2024-25,5,8246,48,0.882,0.678
+H0101,Royal Brisbane and Women's Hospital,QLD,2020-21,1,694,0,1.0,0.782
+H0101,Royal Brisbane and Women's Hospital,QLD,2020-21,2,11179,8,0.758,0.782
+H0101,Royal Brisbane and Women's Hospital,QLD,2020-21,3,34138,21,0.637,0.782
+H0101,Royal Brisbane and Women's Hospital,QLD,2020-21,4,29630,32,0.748,0.782
+H0101,Royal Brisbane and Women's Hospital,QLD,2020-21,5,10528,53,0.909,0.782
+H0101,Royal Brisbane and Women's Hospital,QLD,2021-22,1,670,0,1.0,0.774
+H0101,Royal Brisbane and Women's Hospital,QLD,2021-22,2,11082,9,0.73,0.774
+H0101,Royal Brisbane and Women's Hospital,QLD,2021-22,3,34560,25,0.649,0.774
+H0101,Royal Brisbane and Women's Hospital,QLD,2021-22,4,30150,34,0.694,0.774
+H0101,Royal Brisbane and Women's Hospital,QLD,2021-22,5,9870,58,0.874,0.774
+H0101,Royal Brisbane and Women's Hospital,QLD,2022-23,1,661,0,1.0,0.698
+H0101,Royal Brisbane and Women's Hospital,QLD,2022-23,2,11002,10,0.668,0.698
+H0101,Royal Brisbane and Women's Hospital,QLD,2022-23,3,36077,24,0.6,0.698
+H0101,Royal Brisbane and Women's Hospital,QLD,2022-23,4,28173,45,0.678,0.698
+H0101,Royal Brisbane and Women's Hospital,QLD,2022-23,5,10485,57,0.875,0.698
+H0101,Royal Brisbane and Women's Hospital,QLD,2023-24,1,722,0,1.0,0.684
+H0101,Royal Brisbane and Women's Hospital,QLD,2023-24,2,11001,11,0.664,0.684
+H0101,Royal Brisbane and Women's Hospital,QLD,2023-24,3,36855,24,0.572,0.684
+H0101,Royal Brisbane and Women's Hospital,QLD,2023-24,4,29804,48,0.711,0.684
+H0101,Royal Brisbane and Women's Hospital,QLD,2023-24,5,10324,58,0.863,0.684
+H0101,Royal Brisbane and Women's Hospital,QLD,2024-25,1,713,0,1.0,0.649
+H0101,Royal Brisbane and Women's Hospital,QLD,2024-25,2,12106,11,0.67,0.649
+H0101,Royal Brisbane and Women's Hospital,QLD,2024-25,3,36505,30,0.541,0.649
+H0101,Royal Brisbane and Women's Hospital,QLD,2024-25,4,31473,40,0.668,0.649
+H0101,Royal Brisbane and Women's Hospital,QLD,2024-25,5,11049,49,0.866,0.649

@@ -1,0 +1,37 @@
+name: dbt CI (DuckDB)
+
+# Runs the full pipeline + tests on every PR and push, using DuckDB.
+# No secrets required — proves the project on a fresh clone (CLAUDE.md §20).
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate fixtures (deterministic)
+        run: python data/sample/generate_sample_data.py
+
+      - name: dbt deps
+        run: dbt deps --project-dir littlevitals_dbt --profiles-dir littlevitals_dbt
+
+      - name: dbt build (run + test on DuckDB CI target)
+        run: dbt build --project-dir littlevitals_dbt --profiles-dir littlevitals_dbt --target ci
+
+      - name: Lint SQL
+        run: sqlfluff lint littlevitals_dbt/models || true

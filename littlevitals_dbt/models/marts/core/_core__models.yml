@@ -1,0 +1,160 @@
+version: 2
+
+models:
+  # ===========================================================================
+  - name: dim_date
+    description: "Australian financial-year date dimension (daily spine 2010-2030)."
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: date_key
+        data_type: integer
+        description: "Integer surrogate key in YYYYMMDD form."
+        tests: [unique, not_null]
+      - name: full_date
+        data_type: date
+        description: "Calendar date."
+      - name: day_of_week
+        data_type: integer
+        description: "ISO day of week (1 = Monday ... 7 = Sunday)."
+      - name: day_name
+        data_type: varchar
+        description: "Full weekday name."
+      - name: calendar_year
+        data_type: integer
+      - name: calendar_month
+        data_type: integer
+      - name: calendar_month_name
+        data_type: varchar
+      - name: calendar_quarter
+        data_type: integer
+      - name: aus_financial_year
+        data_type: varchar
+        description: "Australian FY label 'YYYY-YY' (1 Jul - 30 Jun)."
+      - name: aus_financial_year_start_date
+        data_type: date
+        description: "1 July date that begins the financial year."
+      - name: aus_fy_month
+        data_type: integer
+        description: "Month within the FY (July = 1 ... June = 12)."
+      - name: aus_fy_quarter
+        data_type: integer
+        description: "FY quarter (Q1 = Jul-Sep ... Q4 = Apr-Jun)."
+      - name: is_weekday
+        data_type: boolean
+
+  # ===========================================================================
+  - name: dim_hospital
+    description: "Conformed hospital dimension (SCD Type 1) with an Unknown member."
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: hospital_key
+        data_type: varchar
+        description: "Surrogate key (hash of hospital_code); '-1' = Unknown."
+        tests: [unique, not_null]
+      - name: hospital_code
+        data_type: varchar
+        description: "AIHW hospital code (natural key)."
+        tests: [not_null]
+      - name: hospital_name
+        data_type: varchar
+      - name: state_code
+        data_type: varchar
+      - name: state_name
+        data_type: varchar
+      - name: lhn_name
+        data_type: varchar
+        description: "Local Hospital Network / health service."
+      - name: peer_group
+        data_type: varchar
+        description: "AIHW hospital peer group."
+      - name: latitude
+        data_type: double
+      - name: longitude
+        data_type: double
+      - name: is_paediatric
+        data_type: boolean
+        description: "True for children's hospitals."
+
+  # ===========================================================================
+  - name: dim_triage_category
+    description: "Australasian Triage Scale categories 1-5 with clinical targets, plus Unknown."
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: triage_key
+        data_type: varchar
+        tests: [unique, not_null]
+      - name: triage_code
+        data_type: integer
+        tests: [not_null]
+      - name: triage_name
+        data_type: varchar
+      - name: max_wait_minutes
+        data_type: integer
+      - name: on_time_target_pct
+        data_type: double
+      - name: description
+        data_type: varchar
+
+  # ===========================================================================
+  - name: fct_ed_presentations
+    description: >
+      Gold ED fact. Grain: hospital x financial_year x triage_category (annual).
+      Measures of volume, wait time, on-time performance and benchmark variance.
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: ed_presentation_key
+        data_type: varchar
+        description: "Surrogate PK (hash of hospital_code + FY + triage)."
+        tests: [unique, not_null]
+      - name: hospital_key
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_hospital'), field: hospital_key }
+      - name: triage_key
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_triage_category'), field: triage_key }
+      - name: date_key
+        data_type: integer
+        description: "FK to dim_date at the 1 July start of the financial year."
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_date'), field: date_key }
+      - name: financial_year
+        data_type: varchar
+      - name: triage_code
+        data_type: integer
+        description: "Degenerate dimension (ATS 1-5)."
+      - name: total_presentations
+        data_type: integer
+        tests:
+          - not_null
+          - dbt_utils.accepted_range: { min_value: 0 }
+      - name: median_wait_minutes
+        data_type: integer
+        tests:
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 1440 }
+      - name: pct_seen_on_time
+        data_type: double
+        description: "Proportion (0-1) seen within the ATS benchmark."
+        tests:
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 1 }
+      - name: four_hour_rule_pct
+        data_type: double
+      - name: national_median_wait_minutes
+        data_type: integer
+      - name: national_on_time_pct
+        data_type: double
+      - name: on_time_target_pct
+        data_type: double
+      - name: variance_from_national_minutes
+        data_type: integer
+        description: "hospital median wait minus national median (minutes)."
+      - name: benchmark_met_flag
+        data_type: boolean

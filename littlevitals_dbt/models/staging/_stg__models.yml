@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_aihw__ed_presentations
+    description: "Cleaned, type-cast AIHW ED presentations (one row per hospital x FY x triage)."
+    columns:
+      - name: hospital_code
+        tests: [not_null]
+      - name: triage_code
+        tests:
+          - not_null
+          - accepted_values: { values: [1, 2, 3, 4, 5] }
+      - name: pct_seen_on_time
+        description: Proportion (0-1) of presentations seen within the ATS benchmark.
+        tests:
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 1 }
+      - name: median_wait_minutes
+        tests:
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 1440 }
+
+  - name: stg_aihw__reporting_units
+    description: "Cleaned AIHW hospital master."
+    columns:
+      - name: hospital_code
+        tests: [unique, not_null]

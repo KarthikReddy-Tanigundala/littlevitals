@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: int_ed__presentations_enriched
+    description: >
+      ED presentations enriched with hospital attributes, national benchmarks and
+      ATS targets, with derived variance and benchmark-met flag. Grain: hospital
+      x financial_year x triage_category.
+    columns:
+      - name: hospital_code
+        tests: [not_null]
+      - name: benchmark_met_flag
+        description: True when pct_seen_on_time meets/exceeds the ATS on-time target.
+
+unit_tests:
+  # Validates the core transformation logic (variance + benchmark flag), not just
+  # the data. Demonstrates dbt unit testing (CLAUDE.md 27.3).
+  - name: test_benchmark_met_flag_and_variance
+    model: int_ed__presentations_enriched
+    given:
+      - input: ref('stg_aihw__ed_presentations')
+        rows:
+          - { hospital_code: H9, hospital_name: Test Hosp, state_code: VIC, financial_year: "2024-25", triage_code: 2, total_presentations: 100, median_wait_minutes: 12, pct_seen_on_time: 0.85, four_hour_rule_pct: 0.70 }
+          - { hospital_code: H9, hospital_name: Test Hosp, state_code: VIC, financial_year: "2024-25", triage_code: 3, total_presentations: 200, median_wait_minutes: 30, pct_seen_on_time: 0.60, four_hour_rule_pct: 0.70 }
+      - input: ref('stg_aihw__reporting_units')
+        rows:
+          - { hospital_code: H9, hospital_name: Test Hosp, state_code: VIC, lhn_name: Test LHN, peer_group: Principal referral, latitude: -37.8, longitude: 144.9 }
+      - input: ref('seed_national_benchmarks')
+        rows:
+          - { financial_year: "2024-25", triage_code: 2, national_median_wait_minutes: 11, national_on_time_pct: 0.66 }
+          - { financial_year: "2024-25", triage_code: 3, national_median_wait_minutes: 29, national_on_time_pct: 0.57 }
+      - input: ref('seed_triage_categories')
+        rows:
+          - { triage_code: 2, triage_name: Emergency, max_wait_minutes: 10, on_time_target_pct: 0.80, description: x }
+          - { triage_code: 3, triage_name: Urgent, max_wait_minutes: 30, on_time_target_pct: 0.75, description: x }
+    expect:
+      rows:
+        - { hospital_code: H9, hospital_name: Test Hosp, state_code: VIC, financial_year: "2024-25", triage_code: 2, total_presentations: 100, median_wait_minutes: 12, pct_seen_on_time: 0.85, four_hour_rule_pct: 0.70, lhn_name: Test LHN, peer_group: Principal referral, latitude: -37.8, longitude: 144.9, national_median_wait_minutes: 11, national_on_time_pct: 0.66, on_time_target_pct: 0.80, variance_from_national_minutes: 1, benchmark_met_flag: true }
+        - { hospital_code: H9, hospital_name: Test Hosp, state_code: VIC, financial_year: "2024-25", triage_code: 3, total_presentations: 200, median_wait_minutes: 30, pct_seen_on_time: 0.60, four_hour_rule_pct: 0.70, lhn_name: Test LHN, peer_group: Principal referral, latitude: -37.8, longitude: 144.9, national_median_wait_minutes: 29, national_on_time_pct: 0.57, on_time_target_pct: 0.75, variance_from_national_minutes: 1, benchmark_met_flag: false }

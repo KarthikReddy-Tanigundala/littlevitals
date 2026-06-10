@@ -1,0 +1,20 @@
+version: 2
+
+# Snowflake (prod) raw landing tables, populated by the Python ingestion layer.
+# On DuckDB (dev/ci) the staging models read the committed fixture seeds instead
+# (see the target.type switch in each staging model, per CLAUDE.md 16.3 / 20).
+sources:
+  - name: aihw
+    description: Raw AIHW MyHospitals data landed by ingestion/01_ingest_aihw_api.py.
+    database: "{{ env_var('SNOWFLAKE_DATABASE', 'LITTLEVITALS_DB') }}"
+    schema: BRONZE
+    tables:
+      - name: raw_aihw_ed_presentations
+        description: One row per hospital x financial_year x triage_category (ED measure).
+        # Freshness is meaningful only against the live Snowflake load.
+        loaded_at_field: _ingested_at
+        freshness:
+          warn_after: { count: 30, period: day }
+          error_after: { count: 90, period: day }
+      - name: raw_aihw_reporting_units
+        description: Hospital master (name, code, state, LHN, peer group, lat/lon).

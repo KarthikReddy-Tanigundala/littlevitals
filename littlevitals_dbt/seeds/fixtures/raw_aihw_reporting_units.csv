@@ -1,0 +1,13 @@
+hospital_code,hospital_name,state,lhn_name,peer_group,latitude,longitude
+H0001,Royal Children's Hospital,VIC,The Royal Children's Hospital,Children's hospitals,-37.7935,144.9509
+H0002,The Royal Melbourne Hospital,VIC,Melbourne Health,Principal referral,-37.799,144.9558
+H0003,Monash Medical Centre,VIC,Monash Health,Principal referral,-37.921,145.123
+H0004,Austin Hospital,VIC,Austin Health,Principal referral,-37.756,145.058
+H0005,Footscray Hospital,VIC,Western Health,Public acute group A,-37.8,144.899
+H0006,Box Hill Hospital,VIC,Eastern Health,Public acute group A,-37.819,145.123
+H0007,University Hospital Geelong,VIC,Barwon Health,Principal referral,-38.148,144.362
+H0008,Sunshine Hospital,VIC,Western Health,Public acute group A,-37.761,144.827
+H0009,The Northern Hospital,VIC,Northern Health,Public acute group A,-37.642,145.015
+H0010,Frankston Hospital,VIC,Peninsula Health,Public acute group A,-38.153,145.123
+H0100,The Children's Hospital at Westmead,NSW,Sydney Children's Hospitals Network,Children's hospitals,-33.802,150.993
+H0101,Royal Brisbane and Women's Hospital,QLD,Metro North,Principal referral,-27.447,153.029

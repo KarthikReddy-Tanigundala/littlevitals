@@ -1,0 +1,61 @@
+version: 2
+
+seeds:
+  # ---- Reference / lookup seeds (clinical truth, hand-maintained) ------------
+  - name: seed_triage_categories
+    description: >
+      Australasian Triage Scale (ATS) categories 1-5 with maximum wait-to-treatment
+      and the ACEM "seen on time" performance target for each. Source: ACEM.
+    columns:
+      - name: triage_code
+        description: ATS category code (1 = Resuscitation ... 5 = Non-urgent).
+        tests:
+          - unique
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+      - name: on_time_target_pct
+        description: Target proportion (0-1) of patients seen within the max wait.
+
+  - name: seed_urgency_categories
+    description: Elective surgery urgency categories 1-3 with clinically recommended max wait (days).
+    columns:
+      - name: urgency_code
+        tests: [unique, not_null]
+
+  - name: seed_state_names
+    description: Australian state/territory code to full-name lookup.
+    columns:
+      - name: state_code
+        tests: [unique, not_null]
+
+  - name: seed_national_benchmarks
+    description: >
+      AIHW-style national median ED wait (minutes) and national "seen on time"
+      proportion per financial year and triage category, used as the comparison
+      benchmark in the Gold fact. Illustrative values in the sample build.
+    columns:
+      - name: financial_year
+        tests: [not_null]
+      - name: triage_code
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+  # ---- Fixture seeds (offline stand-in for AIHW raw landing tables, §16.3) ---
+  - name: raw_aihw_reporting_units
+    description: >
+      SAMPLE hospital master (synthetic). Offline stand-in for the AIHW
+      reporting-units endpoint so the pipeline builds without Snowflake/API.
+    columns:
+      - name: hospital_code
+        tests: [unique, not_null]
+
+  - name: raw_aihw_ed_presentations
+    description: >
+      SAMPLE ED presentations (synthetic, seed=42). Grain: hospital x financial_year
+      x triage_category. Offline stand-in for the AIHW MyHospitals ED measure.
+    columns:
+      - name: total_presentations
+        description: Count of ED presentations for the hospital/year/triage cell.

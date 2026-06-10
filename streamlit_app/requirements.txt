@@ -1,0 +1,8 @@
+# Streamlit Community Cloud install target for the LittleVitals app.
+streamlit>=1.37
+plotly>=5.22
+pandas>=2.2
+numpy>=1.26
+duckdb>=1.0
+# For a Snowflake-backed deployment, add:
+# snowflake-connector-python[pandas]>=3.12

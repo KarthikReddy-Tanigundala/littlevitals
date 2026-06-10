@@ -1,0 +1,55 @@
+name: littlevitals
+version: "2.0.0"
+config-version: 2
+
+profile: littlevitals
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+snapshot-paths: ["snapshots"]
+analysis-paths: ["analyses"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Project-wide variables ------------------------------------------------------
+vars:
+  # Australian financial-year reporting window for the date spine.
+  date_spine_start: "2010-01-01"
+  date_spine_end: "2030-12-31"
+  # Reconciliation tolerance (fraction) for Gold-vs-source total checks (§27.4).
+  recon_tolerance: 0.001
+
+# Medallion schemas are driven by +schema below and the generate_schema_name
+# macro (which uses the custom schema verbatim, so BRONZE/SILVER/GOLD appear
+# identically on DuckDB and Snowflake).
+models:
+  littlevitals:
+    +persist_docs:
+      relation: true
+      columns: true
+    staging:
+      +materialized: view
+      +schema: BRONZE
+    intermediate:
+      +materialized: view
+      +schema: SILVER
+    marts:
+      core:
+        +materialized: table
+        +schema: GOLD
+      reporting:
+        +materialized: table
+        +schema: GOLD
+
+seeds:
+  littlevitals:
+    reference:
+      +schema: SEED
+    fixtures:
+      # Local/CI stand-in for the AIHW raw landing tables (§16.3 / §20).
+      +schema: RAW
