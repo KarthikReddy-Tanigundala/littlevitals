@@ -1,0 +1,123 @@
+version: 2
+
+models:
+  # ===========================================================================
+  - name: dim_patient_demographics
+    description: "Demographic junk dimension (age band, sex, SEIFA, Indigenous), SYNTHETIC."
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: patient_demo_key
+        data_type: varchar
+        tests: [unique, not_null]
+      - name: age_band
+        data_type: varchar
+        description: "Neonate / Infant / Toddler / Child / Adolescent / Adult."
+      - name: sex
+        data_type: varchar
+      - name: seifa_irsd_quintile
+        data_type: integer
+        description: "SEIFA IRSD quintile (1 = most disadvantaged, 5 = least)."
+      - name: indigenous_flag
+        data_type: varchar
+      - name: is_paediatric
+        data_type: boolean
+
+  # ===========================================================================
+  - name: dim_diagnosis
+    description: "ICD-10-AM diagnosis lookup (paediatric-focused) with Unknown member."
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: diagnosis_key
+        data_type: varchar
+        tests: [unique, not_null]
+      - name: condition_code
+        data_type: varchar
+        tests: [not_null]
+      - name: condition_description
+        data_type: varchar
+      - name: body_system
+        data_type: varchar
+      - name: is_paediatric_common
+        data_type: varchar
+
+  # ===========================================================================
+  - name: dim_geography
+    description: "Victorian postcode → SA2 / PHN / SEIFA / remoteness, plus Unknown."
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: geography_key
+        data_type: varchar
+        tests: [unique, not_null]
+      - name: postcode
+        data_type: varchar
+      - name: suburb
+        data_type: varchar
+      - name: sa2_name
+        data_type: varchar
+      - name: phn_name
+        data_type: varchar
+      - name: seifa_irsd_quintile
+        data_type: integer
+      - name: remoteness_area
+        data_type: varchar
+
+  # ===========================================================================
+  - name: fct_patient_encounters
+    description: >
+      Gold encounter fact (SYNTHETIC / Synthea). Grain: one row per encounter.
+      Measures: length of stay, cost, 30-day readmission flag.
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: encounter_key
+        data_type: varchar
+        tests: [unique, not_null]
+      - name: patient_id
+        data_type: varchar
+        description: "Degenerate dimension (synthetic patient id)."
+      - name: hospital_key
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_hospital'), field: hospital_key }
+      - name: date_key
+        data_type: integer
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_date'), field: date_key }
+      - name: patient_demo_key
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_patient_demographics'), field: patient_demo_key }
+      - name: diagnosis_key
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_diagnosis'), field: diagnosis_key }
+      - name: geography_key
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_geography'), field: geography_key }
+      - name: encounter_class
+        data_type: varchar
+      - name: age_years
+        data_type: double
+        tests:
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 120 }
+      - name: age_band
+        data_type: varchar
+      - name: is_paediatric
+        data_type: boolean
+      - name: los_hours
+        data_type: double
+        tests:
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 8760 }
+      - name: total_cost
+        data_type: double
+      - name: is_readmission_30d
+        data_type: boolean

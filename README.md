@@ -32,8 +32,9 @@ dbt docs serve    --project-dir littlevitals_dbt --profiles-dir littlevitals_dbt
 
 Or just `make build` (see [`Makefile`](Makefile) / [`make.ps1`](make.ps1)).
 
-**Current build status:** `dbt build` → **63 nodes PASS, 0 errors** (8 models,
-48 data tests, 1 unit test, enforced contracts, source-vs-Gold reconciliation).
+**Current build status:** `dbt build` → **118 nodes PASS, 0 errors** (17 models —
+2 facts + 6 dims + marts, enforced contracts, 1 unit test, source-vs-Gold
+reconciliation, ~90 data tests).
 
 ---
 
@@ -164,8 +165,10 @@ vertical slice — is complete and green.**
 - [ ] Snowflake provisioning (`sql/00_snowflake_setup.sql`) + live ingestion
 - [x] Streamlit companion app — Overview · ED Performance · Scorecard · Benchmark (funnel plot), runs on DuckDB
 - [x] Data-science layer — SARIMA forecast · STL seasonality · k-means clustering · proportion tests + funnel ([analytics/](analytics/README.md))
-- [ ] Power BI (Import) — Executive / ED Deep-Dive / Benchmark pages
-- [ ] Snowflake provisioning + live AIHW ingestion; Synthea + ABS layers (readmission, survival, equity)
+- [x] Synthea paediatric layer — patient encounters fact + demographics/diagnosis/geography dims + paediatric mart (age bands, LOS, readmission, SEIFA equity)
+- [ ] Power BI (Import) — Executive / ED Deep-Dive / Paediatric / Benchmark pages
+- [ ] Streamlit paediatric page + DS readmission/survival/equity (data now available)
+- [ ] Snowflake provisioning + live AIHW ingestion; elective surgery fact; ABS choropleth
 - [ ] Elective surgery + Synthea paediatric layers
 - [ ] GitHub Actions CI + Pages docs deploy
 

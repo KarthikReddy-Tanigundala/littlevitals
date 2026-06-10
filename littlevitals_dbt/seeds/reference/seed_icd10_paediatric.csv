@@ -1,0 +1,23 @@
+condition_code,condition_description,body_system,is_paediatric_common
+J06.9,Acute upper respiratory infection,Respiratory,Y
+J21.9,Acute bronchiolitis,Respiratory,Y
+J45.9,Asthma,Respiratory,Y
+A09,Infectious gastroenteritis,Digestive,Y
+R50.9,Fever unspecified,Symptoms and signs,Y
+H66.9,Otitis media unspecified,Ear,Y
+J03.9,Acute tonsillitis,Respiratory,Y
+R10.4,Abdominal pain,Digestive,Y
+L20.9,Atopic dermatitis,Skin,Y
+S52.50,Fracture of lower end of radius,Injury,Y
+B34.9,Viral infection unspecified,Infectious,Y
+J18.9,Pneumonia unspecified,Respiratory,Y
+S00.9,Superficial injury of head,Injury,Y
+R11.2,Nausea with vomiting,Digestive,Y
+N39.0,Urinary tract infection,Genitourinary,Y
+F90.0,Attention-deficit hyperactivity disorder,Mental health,Y
+G40.9,Epilepsy unspecified,Nervous,Y
+K59.0,Constipation,Digestive,Y
+I10,Essential hypertension,Circulatory,N
+E11.9,Type 2 diabetes mellitus,Endocrine,N
+J44.9,Chronic obstructive pulmonary disease,Respiratory,N
+R07.4,Chest pain unspecified,Circulatory,N

@@ -12,6 +12,17 @@ models:
       - name: benchmark_met_flag
         description: True when pct_seen_on_time meets/exceeds the ATS on-time target.
 
+  - name: int_encounters__enriched
+    description: >
+      Synthea encounters enriched with demographics, geography (SA2/SEIFA) and
+      diagnosis, with derived age, paediatric age band and 30-day readmission
+      flag. Grain: one row per encounter. SYNTHETIC.
+    columns:
+      - name: encounter_id
+        tests: [unique, not_null]
+      - name: age_band
+        description: Paediatric age band from the paediatric_age_band macro.
+
 unit_tests:
   # Validates the core transformation logic (variance + benchmark flag), not just
   # the data. Demonstrates dbt unit testing (CLAUDE.md 27.3).

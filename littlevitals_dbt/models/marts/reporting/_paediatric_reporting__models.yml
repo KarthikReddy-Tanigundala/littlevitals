@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: mart_paediatric_summary
+    description: >
+      Paediatric encounters summarised by ICD-10-AM diagnosis: volume, distinct
+      patients, average length of stay, 30-day readmission rate. SYNTHETIC.
+    columns:
+      - name: condition_code
+        tests: [unique, not_null]
+      - name: encounters
+        tests:
+          - dbt_utils.accepted_range: { min_value: 1 }
+      - name: readmission_rate_30d
+        tests:
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 1 }

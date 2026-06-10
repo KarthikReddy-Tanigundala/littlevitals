@@ -23,3 +23,20 @@ models:
     columns:
       - name: hospital_code
         tests: [unique, not_null]
+
+  - name: stg_synthea__patients
+    description: "Cleaned Synthea synthetic patients (SYNTHETIC)."
+    columns:
+      - name: patient_id
+        tests: [unique, not_null]
+
+  - name: stg_synthea__encounters
+    description: "Cleaned Synthea synthetic encounters (SYNTHETIC)."
+    columns:
+      - name: encounter_id
+        tests: [unique, not_null]
+      - name: hospital_code
+        tests: [not_null]
+
+  - name: stg_synthea__conditions
+    description: "Cleaned Synthea synthetic conditions/diagnoses (SYNTHETIC)."

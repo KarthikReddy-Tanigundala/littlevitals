@@ -18,3 +18,15 @@ sources:
           error_after: { count: 90, period: day }
       - name: raw_aihw_reporting_units
         description: Hospital master (name, code, state, LHN, peer group, lat/lon).
+
+  - name: synthea
+    description: Raw Synthea synthetic patient export (patient-level, SYNTHETIC).
+    database: "{{ env_var('SNOWFLAKE_DATABASE', 'LITTLEVITALS_DB') }}"
+    schema: BRONZE
+    tables:
+      - name: raw_synthea_patients
+        description: Synthetic patient demographics.
+      - name: raw_synthea_encounters
+        description: Synthetic encounters (one row per visit).
+      - name: raw_synthea_conditions
+        description: Synthetic diagnoses (ICD-10-AM).

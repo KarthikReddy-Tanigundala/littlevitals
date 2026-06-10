@@ -29,6 +29,22 @@ seeds:
       - name: state_code
         tests: [unique, not_null]
 
+  - name: seed_icd10_paediatric
+    description: ICD-10-AM diagnosis codes (paediatric-focused) with body system.
+    columns:
+      - name: condition_code
+        tests: [unique, not_null]
+
+  - name: seed_vic_geography
+    description: Victorian postcode to suburb/SA2/PHN/SEIFA-IRSD-quintile/remoteness lookup.
+    columns:
+      - name: postcode
+        tests: [unique, not_null]
+      - name: seifa_irsd_quintile
+        description: SEIFA IRSD quintile (1 = most disadvantaged, 5 = least).
+        tests:
+          - accepted_values: { values: [1, 2, 3, 4, 5] }
+
   - name: seed_national_benchmarks
     description: >
       AIHW-style national median ED wait (minutes) and national "seen on time"
@@ -59,3 +75,18 @@ seeds:
     columns:
       - name: total_presentations
         description: Count of ED presentations for the hospital/year/triage cell.
+
+  - name: raw_synthea_patients
+    description: "SYNTHETIC patient demographics (seed=42). Synthea-style stand-in."
+    columns:
+      - name: patient_id
+        tests: [unique, not_null]
+
+  - name: raw_synthea_encounters
+    description: "SYNTHETIC encounters (seed=42). Grain: one row per encounter."
+    columns:
+      - name: encounter_id
+        tests: [unique, not_null]
+
+  - name: raw_synthea_conditions
+    description: "SYNTHETIC diagnoses (seed=42), one row per encounter diagnosis."
