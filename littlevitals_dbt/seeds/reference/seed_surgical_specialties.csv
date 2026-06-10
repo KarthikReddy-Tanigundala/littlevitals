@@ -1,0 +1,11 @@
+specialty_code,specialty_name,srg_group
+OPH,Ophthalmology,Eye
+ORT,Orthopaedic surgery,Musculoskeletal
+GEN,General surgery,Abdominal
+ENT,Ear nose and throat,Head and neck
+URO,Urology,Genitourinary
+GYN,Gynaecology,Reproductive
+PLA,Plastic surgery,Skin and soft tissue
+VAS,Vascular surgery,Circulatory
+CAR,Cardiothoracic surgery,Circulatory
+NEU,Neurosurgery,Nervous

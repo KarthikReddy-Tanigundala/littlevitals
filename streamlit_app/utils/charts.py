@@ -11,6 +11,8 @@ import plotly.graph_objects as go
 TEAL = "#1a6b5e"
 INK = "#1c2b29"
 GREY = "#8a9a97"
+AMBER = "#e0a32e"
+CORAL = "#d1495b"
 STATUS_COLORS = {
     "Meets Benchmark": "#2e9e6b",
     "At Risk": "#e0a32e",

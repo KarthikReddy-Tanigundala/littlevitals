@@ -23,6 +23,14 @@ models:
       - name: age_band
         description: Paediatric age band from the paediatric_age_band macro.
 
+  - name: int_elective__episodes_enriched
+    description: >
+      Elective episodes enriched with urgency/specialty reference data and derived
+      financial year, overdue flag and admitted (survival event) flag. SYNTHETIC.
+    columns:
+      - name: episode_id
+        tests: [unique, not_null]
+
 unit_tests:
   # Validates the core transformation logic (variance + benchmark flag), not just
   # the data. Demonstrates dbt unit testing (CLAUDE.md 27.3).

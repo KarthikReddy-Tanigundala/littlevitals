@@ -32,9 +32,9 @@ dbt docs serve    --project-dir littlevitals_dbt --profiles-dir littlevitals_dbt
 
 Or just `make build` (see [`Makefile`](Makefile) / [`make.ps1`](make.ps1)).
 
-**Current build status:** `dbt build` → **118 nodes PASS, 0 errors** (17 models —
-2 facts + 6 dims + marts, enforced contracts, 1 unit test, source-vs-Gold
-reconciliation, ~90 data tests).
+**Current build status:** `dbt build` → **155 nodes PASS, 0 errors** (23 models —
+3 facts + 8 dims + marts, enforced contracts, 1 unit test, source-vs-Gold
+reconciliation, ~120 data tests).
 
 ---
 
@@ -167,8 +167,9 @@ vertical slice — is complete and green.**
 - [x] Data-science layer — SARIMA forecast · STL seasonality · k-means clustering · proportion tests + funnel ([analytics/](analytics/README.md))
 - [x] Synthea paediatric layer — patient encounters fact + demographics/diagnosis/geography dims + paediatric mart (age bands, LOS, readmission, SEIFA equity)
 - [x] Streamlit paediatric page + DS readmission model (ROC-AUC ≈ 0.67) & SEIFA equity analysis
-- [ ] Power BI (Import) — Executive / ED Deep-Dive / Paediatric / Benchmark pages
-- [ ] Snowflake provisioning + live AIHW ingestion; elective surgery fact + survival; ABS choropleth
+- [x] Elective surgery layer — episode fact + urgency/specialty dims + mart; Streamlit tracker; Kaplan–Meier waitlist survival
+- [ ] Power BI (Import) — Executive / ED / Paediatric / Elective / Benchmark pages
+- [ ] Snowflake provisioning + live AIHW ingestion; ABS SA2 choropleth
 - [ ] Elective surgery + Synthea paediatric layers
 - [ ] GitHub Actions CI + Pages docs deploy
 

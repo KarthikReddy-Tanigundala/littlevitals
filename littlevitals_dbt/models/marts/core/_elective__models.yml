@@ -1,0 +1,82 @@
+version: 2
+
+models:
+  - name: dim_urgency_category
+    description: "Elective surgery urgency categories 1-3 with recommended max wait (days)."
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: urgency_key
+        data_type: varchar
+        tests: [unique, not_null]
+      - name: urgency_code
+        data_type: integer
+      - name: urgency_name
+        data_type: varchar
+      - name: recommended_max_wait_days
+        data_type: integer
+      - name: description
+        data_type: varchar
+
+  - name: dim_surgical_specialty
+    description: "Surgical specialty (SRG) dimension, plus Unknown member."
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: specialty_key
+        data_type: varchar
+        tests: [unique, not_null]
+      - name: specialty_code
+        data_type: varchar
+      - name: specialty_name
+        data_type: varchar
+      - name: srg_group
+        data_type: varchar
+
+  - name: fct_elective_surgery
+    description: >
+      Gold elective-surgery fact at waitlist-episode grain (SYNTHETIC). is_admitted
+      is the survival event; non-admitted episodes are right-censored.
+    config:
+      contract: { enforced: true }
+    columns:
+      - name: elective_episode_key
+        data_type: varchar
+        tests: [unique, not_null]
+      - name: hospital_key
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_hospital'), field: hospital_key }
+      - name: urgency_key
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_urgency_category'), field: urgency_key }
+      - name: specialty_key
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_surgical_specialty'), field: specialty_key }
+      - name: date_key
+        data_type: integer
+        tests:
+          - not_null
+          - relationships: { to: ref('dim_date'), field: date_key }
+      - name: financial_year
+        data_type: varchar
+      - name: wait_days
+        data_type: integer
+        tests:
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 3650 }
+      - name: recommended_max_wait_days
+        data_type: integer
+      - name: is_overdue
+        data_type: boolean
+      - name: is_admitted
+        data_type: boolean
+        description: "Survival event: 1 = admitted for surgery, 0 = censored."
+      - name: removal_reason
+        data_type: varchar
+        tests:
+          - accepted_values: { values: ["Admitted", "Removed - other", "Still waiting"] }

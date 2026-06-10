@@ -45,6 +45,14 @@ seeds:
         tests:
           - accepted_values: { values: [1, 2, 3, 4, 5] }
 
+  - name: seed_surgical_specialties
+    description: Surgical specialty (SRG) reference for elective surgery.
+    columns:
+      - name: specialty_code
+        tests: [unique, not_null]
+      - name: specialty_name
+        tests: [unique, not_null]
+
   - name: seed_national_benchmarks
     description: >
       AIHW-style national median ED wait (minutes) and national "seen on time"
@@ -90,3 +98,9 @@ seeds:
 
   - name: raw_synthea_conditions
     description: "SYNTHETIC diagnoses (seed=42), one row per encounter diagnosis."
+
+  - name: raw_elective_surgery_episodes
+    description: "SYNTHETIC elective surgery waitlist episodes (seed=42), one row per episode."
+    columns:
+      - name: episode_id
+        tests: [unique, not_null]

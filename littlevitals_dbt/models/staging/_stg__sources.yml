@@ -30,3 +30,11 @@ sources:
         description: Synthetic encounters (one row per visit).
       - name: raw_synthea_conditions
         description: Synthetic diagnoses (ICD-10-AM).
+
+  - name: elective
+    description: Raw elective-surgery waitlist episodes (SYNTHETIC / ESIS-style).
+    database: "{{ env_var('SNOWFLAKE_DATABASE', 'LITTLEVITALS_DB') }}"
+    schema: BRONZE
+    tables:
+      - name: raw_elective_surgery_episodes
+        description: One row per waitlist episode.

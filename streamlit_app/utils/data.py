@@ -87,6 +87,20 @@ def load_encounters() -> pd.DataFrame:
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
+def load_elective_episodes() -> pd.DataFrame:
+    return query(
+        """
+        select f.wait_days, f.is_admitted, f.is_overdue, f.financial_year,
+               u.urgency_code, u.urgency_name, u.recommended_max_wait_days,
+               s.specialty_name
+        from GOLD.fct_elective_surgery f
+        join GOLD.dim_urgency_category u on f.urgency_key = u.urgency_key
+        join GOLD.dim_surgical_specialty s on f.specialty_key = s.specialty_key
+        """
+    )
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
 def load_monthly_paediatric() -> pd.DataFrame:
     return pd.read_csv(REPO_ROOT / "data" / "sample" / "monthly_paediatric_ed.csv",
                        parse_dates=["month_date"])

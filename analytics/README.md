@@ -13,6 +13,7 @@ saves a figure to `analytics/outputs/`.
 | [`03_hospital_clustering.py`](03_hospital_clustering.py) | **k-means** on standardised KPI vectors + PCA | Data-driven hospital clusters vs AIHW peer groups |
 | [`04_benchmark_significance.py`](04_benchmark_significance.py) | **Two-proportion z-test** + **funnel plot** (Spiegelhalter) | Significance vs pooled rate, special-cause outliers |
 | [`05_readmission_and_equity.py`](05_readmission_and_equity.py) | **Logistic regression** (held-out ROC-AUC) + **linear trend test** | 30-day readmission risk model (AUC ≈ 0.67) + SEIFA equity gradient |
+| [`06_waitlist_survival.py`](06_waitlist_survival.py) | **Kaplan–Meier** + log-rank test | Elective time-to-admission curves by urgency (medians 22 / 66 / 209 days) |
 
 ## Run
 
@@ -38,6 +39,5 @@ python analytics\04_benchmark_significance.py
 
 ## Planned (next)
 
-- **Waitlist survival** — Kaplan–Meier time-to-treatment by urgency category
-  (with the elective-surgery layer).
 - **Calibration** — add a calibration curve + Brier score to the readmission model.
+- **Cox model** — covariate-adjusted hazard of admission (lifelines `CoxPHFitter`).

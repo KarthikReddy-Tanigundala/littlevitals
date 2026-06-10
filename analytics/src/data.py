@@ -48,6 +48,20 @@ def load_encounters() -> pd.DataFrame:
     ).fetch_df()
 
 
+def load_elective() -> pd.DataFrame:
+    """Elective surgery episodes joined to urgency + specialty (for survival)."""
+    return _con().execute(
+        """
+        select f.wait_days, f.is_admitted, f.is_overdue, f.financial_year,
+               u.urgency_code, u.urgency_name, u.recommended_max_wait_days,
+               s.specialty_name
+        from GOLD.fct_elective_surgery f
+        join GOLD.dim_urgency_category u on f.urgency_key = u.urgency_key
+        join GOLD.dim_surgical_specialty s on f.specialty_key = s.specialty_key
+        """
+    ).fetch_df()
+
+
 def load_monthly_paediatric() -> pd.Series:
     """
     Synthetic monthly paediatric ED presentations as a time-indexed Series

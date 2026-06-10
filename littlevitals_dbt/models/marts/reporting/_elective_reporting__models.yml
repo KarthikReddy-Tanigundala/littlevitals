@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: mart_elective_surgery_wait
+    description: >
+      Elective surgery waiting times by hospital x financial_year x urgency
+      category: episode counts, median and 90th-percentile wait (admitted),
+      % seen within clinically recommended time, and overdue counts. SYNTHETIC.
+    columns:
+      - name: pct_on_time
+        tests:
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 1 }
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [hospital_name, financial_year, urgency_code]

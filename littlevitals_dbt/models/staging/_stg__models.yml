@@ -40,3 +40,12 @@ models:
 
   - name: stg_synthea__conditions
     description: "Cleaned Synthea synthetic conditions/diagnoses (SYNTHETIC)."
+
+  - name: stg_elective__episodes
+    description: "Cleaned elective surgery waitlist episodes (SYNTHETIC)."
+    columns:
+      - name: episode_id
+        tests: [unique, not_null]
+      - name: urgency_category
+        tests:
+          - accepted_values: { values: [1, 2, 3] }
